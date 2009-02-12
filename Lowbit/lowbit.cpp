@@ -4,7 +4,6 @@ int lowbit(int p){return p&(-p);}
 int a[100][100],t[100][100],n;
 int plus(int num,int posx,int posy)
 	{
-	a[posx][posy]+=num;
 	for(int i=posx;i<=n;i+=lowbit(i))
 		for(int j=posy;j<=n;j+=lowbit(j))
 			t[i][j]+=num;
@@ -29,6 +28,6 @@ int main()
 			fscanf(in,"%d",&tmp);
 			plus(tmp,i,j);
 			}
-	printf("%d\n",get(n,n));
+	printf("%d\n",get(1,1));
 	return 0;
 	}
