@@ -1,3 +1,7 @@
+/*
+KM算法只能在两边点数相等的情况下使用
+如果不相等，可以用补0点法
+*/
 #include<cstring>
 #include<stdio.h>
 #define INF 21474836
