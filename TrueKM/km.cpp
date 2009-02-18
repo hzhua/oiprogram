@@ -8,6 +8,7 @@ int pre[201];
 int lx[201],ly[201];
 bool sx[201],sy[201];
 int slack[201];
+
 bool hun(int pos)
 	{
 	sx[pos]=true;
@@ -15,9 +16,9 @@ bool hun(int pos)
 		{
 		int t=conn[pos][i];
 		if(sy[t])continue;
-		if(lx[pos]+ly[t]-w[pos][t]==0)
-			{
-			sy[t]=true;
+		//sy[t]=true;//WRONG
+		if(lx[pos]+ly[t]==w[pos][t])
+			{sy[t]=true;//Right
 			if(pre[t]==0||hun(pre[t]))
 				{
 				pre[t]=pos;
@@ -36,14 +37,14 @@ void adjust()
 	{
 	int min=INF;
 	for(int i=1;i<=m;i++)
-		if(slack[i]<min)
+		if(min>slack[i])
 			min=slack[i];
 	for(int i=1;i<=n;i++)
 		if(sx[i])
 			lx[i]-=min;
-	for(int i=1;i<=m;i++)
-		if(sy[i])
-			ly[i]+=min;
+	for(int j=1;j<=m;j++)
+		if(sy[j])
+			ly[j]+=min;
 	for(int i=1;i<=m;i++)
 		slack[i]-=min;
 	}
@@ -56,8 +57,8 @@ void km()
 	for(int i=1;i<=n;i++)
 		while(1)
 			{
-			memset(sy,0,sizeof(sy));
 			memset(sx,0,sizeof(sx));
+			memset(sy,0,sizeof(sy));
 			memset(slack,0x7f,sizeof(slack));
 			if(hun(i))
 				break;
