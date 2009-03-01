@@ -1,85 +1,73 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<cstring>
 int tn,father[100000],left[100000],right[100000];
 int size[100000];
 int v[100000]; 
 int root;
 void update(int x)
 	{size[x]=size[left[x]]+size[right[x]]+1;}
-void leftrotate(int pos)
-	{
-	int y=father[pos];
-	right[y]=left[pos];
-	if(left[pos]!=0)
-		father[left[pos]]=y;
-	father[pos]=father[y];
-	if(father[y])
-		if(y==left[father[y]])
-			left[father[y]]=pos;
-		else
-			right[father[y]]=pos;
-	left[pos]=y;
-	father[y]=pos;
-	update(y);
-	update(pos);
-	return;
-	}
-void rightrotate(int pos)
+void rr(int pos)
 	{
 	int y=father[pos];
 	left[y]=right[pos];
-	if(right[pos]!=0)
+	if(!right[pos])
 		father[right[pos]]=y;
+	right[pos]=y;
 	father[pos]=father[y];
 	if(father[y])
-		if(y==left[father[y]])
+		{
+		if(left[father[y]]==y)
 			left[father[y]]=pos;
-		else
-			right[father[y]]=pos;
-	right[pos]=y;
+		else right[father[y]]=pos;
+		}
 	father[y]=pos;
 	update(y);
 	update(pos);
-	return;
+	}
+void lr(int pos)
+	{
+	int y=father[pos];
+	right[y]=left[pos];
+	if(!left[pos])
+		father[left[pos]]=y;
+	left[pos]=y;
+	father[pos]=father[y];
+	if(father[y]) //!!!!@!@#!@#!@#!
+		{
+		if(left[father[y]]==y)
+			left[father[y]]=pos;
+		else right[father[y]]=pos;
+		}
+	father[y]=pos;
+	update(y);
+	update(pos);
 	}
 void splay(int pos,int topos)
 	{
-	int y=father[pos];
-	if(y==0)return;
-	if(topos==0)root=pos;
+	if(topos==0)root=pos;//!!!!#@$@#$@#$@#$@#$$
 	while(father[pos]!=topos)
 		{
+		int y=father[pos];
 		if(father[y]==topos)
 			{
-			if(pos==left[y])
-				rightrotate(pos);
-			else leftrotate(pos);
-			break;
-			}
-		if(y==left[father[y]])
-			{
-			if(pos==left[y])
-				{
-				rightrotate(y);
-				rightrotate(pos);
-				}
-			else 
-				{
-				leftrotate(pos);
-				rightrotate(pos);
-				}
+			if(left[y]==pos)
+				rr(pos);
+			else lr(pos);
 			}
 		else
 			{
-			if(pos==right[y])
+			if(left[father[y]]==y)
 				{
-				leftrotate(y);
-				leftrotate(pos);
+				if(left[y]==pos)
+					{rr(y);rr(pos);}
+				else {lr(pos);rr(pos);}
 				}
 			else 
 				{
-				rightrotate(pos);
-				leftrotate(pos);
+				if(right[y]==pos)
+					{lr(y);lr(pos);}
+				else {rr(pos);lr(pos);}
 				}
 			}
 		}
@@ -121,6 +109,7 @@ void output(int pos)
 	output(right[pos]);
 	printf(")");
 	}
+
 int main()
 	{
 	//freopen("splay.in","r",stdin);
