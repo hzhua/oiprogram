@@ -120,7 +120,6 @@ int main()
 		insert(tmp);
 		}
 	output(root);
-	maintain(root,LEFT);
 	printf("\n");
 	return 0;
 	}
