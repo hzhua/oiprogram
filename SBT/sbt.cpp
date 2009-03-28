@@ -50,8 +50,8 @@ int lr(int x)
 	}
 void maintain(int pos,int dir)
 	{
-	if(dir==LEFT && left[pos]==0)return;
-	if(dir==RIGHT && right[pos]==0)return;
+	//if(dir==LEFT && left[pos]==0)return;
+	//if(dir==RIGHT && right[pos]==0)return;
 	if(dir==RIGHT)
 		{
 		if(left[left[pos]] && size[right[pos]]<size[left[left[pos]]])

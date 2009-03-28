@@ -50,7 +50,7 @@ int run_sap()
 	memset(vh,0,sizeof(vh));
 	vh[0]=n;
 	flow=0;
-	memset(gap,0,sizeof(0));
+	memset(gap,0,sizeof(gap));
 	while(gap[1]<n)
 		{
 		flag=false;//FORGET!!
