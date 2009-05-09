@@ -66,10 +66,10 @@ int q2(int a,int b)
 	}
 int main()
 	{
-	int a[]={1,1,2,1,1,1,2,2};
+	int a[]={1,1,1,1,1};
 	int ans[100]={0};
-	da(a,ans,8,3);
-	calheight(a,ans,8);
+	da(a,ans,5,3);
+	calheight(a,ans,5);
 	gen(7);	
 	printf("%d\n",q2(0,4));
 	return 0;
